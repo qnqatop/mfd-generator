@@ -168,6 +168,90 @@ export default [
       breadcrumbs: ["dashboard", "regionList", "regionAdd"]
     }
   },
+  /* EncryptionKey */
+  {
+    name: "encryptionKeyList",
+    path: "/encryption-keys",
+    component: () =>
+      import("@/pages/Entity/EncryptionKey/List.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "encryptionKeyList"]
+    }
+  },
+  {
+    name: "encryptionKeyEdit",
+    path: "/encryption-keys/:id/edit",
+    component: () =>
+      import("@/pages/Entity/EncryptionKey/Form.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "encryptionKeyList", "encryptionKeyEdit"]
+    }
+  },
+  {
+    name: "encryptionKeyAdd",
+    path: "/encryption-keys/add",
+    component: () =>
+      import("@/pages/Entity/EncryptionKey/Form.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "encryptionKeyList", "encryptionKeyAdd"]
+    }
+  },
+  /* LoginCode */
+  {
+    name: "loginCodeList",
+    path: "/login-codes",
+    component: () =>
+      import("@/pages/Entity/LoginCode/List.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "loginCodeList"]
+    }
+  },
+  {
+    name: "loginCodeEdit",
+    path: "/login-codes/:id/edit",
+    component: () =>
+      import("@/pages/Entity/LoginCode/Form.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "loginCodeList", "loginCodeEdit"]
+    }
+  },
+  {
+    name: "loginCodeAdd",
+    path: "/login-codes/add",
+    component: () =>
+      import("@/pages/Entity/LoginCode/Form.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "loginCodeList", "loginCodeAdd"]
+    }
+  },
+  /* SiteUser */
+  {
+    name: "siteUserList",
+    path: "/site-users",
+    component: () =>
+      import("@/pages/Entity/SiteUser/List.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "siteUserList"]
+    }
+  },
+  {
+    name: "siteUserEdit",
+    path: "/site-users/:id/edit",
+    component: () =>
+      import("@/pages/Entity/SiteUser/Form.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "siteUserList", "siteUserEdit"]
+    }
+  },
+  {
+    name: "siteUserAdd",
+    path: "/site-users/add",
+    component: () =>
+      import("@/pages/Entity/SiteUser/Form.vue"),
+    meta: {
+      breadcrumbs: ["dashboard", "siteUserList", "siteUserAdd"]
+    }
+  },
   /* VfsFile */
   {
     name: "vfsFileList",

@@ -3,7 +3,6 @@ package xml
 import (
 	"fmt"
 	"log"
-	"os"
 	"strings"
 
 	"github.com/vmkteam/mfd-generator/mfd"
@@ -173,7 +172,7 @@ func parseNamespacesFlag(v string) map[string]string {
 func (g *Generator) Generate() (err error) {
 	var logger *log.Logger
 	if g.verbose {
-		logger = log.New(os.Stdout, "", log.LstdFlags)
+		logger = log.Default()
 	}
 
 	genna := genna.New(g.options.URL, logger)

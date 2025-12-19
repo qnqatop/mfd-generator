@@ -1,3 +1,4 @@
+//nolint:dupl,funlen
 package test
 
 import (
@@ -54,7 +55,6 @@ func City(t *testing.T, dbo orm.DB, in *db.City, ops ...CityOpFunc) (*db.City, C
 		if _, err := dbo.ModelContext(t.Context(), &db.City{ID: city.ID}).WherePK().Delete(); err != nil {
 			t.Fatal(err)
 		}
-
 		// Clean up related entities from the last to the first
 		for i := len(cleaners) - 1; i >= 0; i-- {
 			cleaners[i]()
@@ -74,12 +74,7 @@ func WithCityRelations(t *testing.T, dbo orm.DB, in *db.City) Cleaner {
 		in.Region = &db.Region{}
 	}
 
-	// Inject relation IDs into relations which have the same relations
-	in.Region.CountryID = in.CountryID
-
-	// Check embedded entities by FK
-
-	// Region. Check if all FKs are provided.
+	// Check if all FKs are provided. Fill them into the main struct rels
 
 	if in.RegionID != 0 {
 		in.Region.ID = in.RegionID
@@ -89,6 +84,9 @@ func WithCityRelations(t *testing.T, dbo orm.DB, in *db.City) Cleaner {
 		in.Country.ID = in.CountryID
 	}
 
+	// Inject relation IDs into relations which have the same relations
+	in.Region.CountryID = in.CountryID
+	in.Region.Country = in.Country
 	// Fetch the relation. It creates if the FKs are provided it fetch from DB by PKs. Else it creates new one.
 	{
 		rel, relatedCleaner := Region(t, dbo, in.Region, WithRegionRelations, WithFakeRegion)
@@ -98,16 +96,6 @@ func WithCityRelations(t *testing.T, dbo orm.DB, in *db.City) Cleaner {
 		in.Country = rel.Country
 
 		cleaners = append(cleaners, relatedCleaner)
-	}
-
-	// Country. Check if all FKs are provided.
-
-	if in.RegionID != 0 {
-		in.Region.ID = in.RegionID
-	}
-
-	if in.CountryID != 0 {
-		in.Country.ID = in.CountryID
 	}
 
 	// Fetch the relation. It creates if the FKs are provided it fetch from DB by PKs. Else it creates new one.
@@ -128,14 +116,6 @@ func WithCityRelations(t *testing.T, dbo orm.DB, in *db.City) Cleaner {
 }
 
 func WithFakeCity(t *testing.T, dbo orm.DB, in *db.City) Cleaner {
-	if in.RegionID == 0 {
-		in.RegionID = gofakeit.IntRange(1, 10)
-	}
-
-	if in.CountryID == 0 {
-		in.CountryID = gofakeit.IntRange(1, 10)
-	}
-
 	if in.Title == "" {
 		in.Title = cutS(gofakeit.Sentence(10), 255)
 	}
@@ -199,7 +179,6 @@ func Country(t *testing.T, dbo orm.DB, in *db.Country, ops ...CountryOpFunc) (*d
 		if _, err := dbo.ModelContext(t.Context(), &db.Country{ID: country.ID}).WherePK().Delete(); err != nil {
 			t.Fatal(err)
 		}
-
 		// Clean up related entities from the last to the first
 		for i := len(cleaners) - 1; i >= 0; i-- {
 			cleaners[i]()
@@ -271,7 +250,6 @@ func Region(t *testing.T, dbo orm.DB, in *db.Region, ops ...RegionOpFunc) (*db.R
 		if _, err := dbo.ModelContext(t.Context(), &db.Region{ID: region.ID}).WherePK().Delete(); err != nil {
 			t.Fatal(err)
 		}
-
 		// Clean up related entities from the last to the first
 		for i := len(cleaners) - 1; i >= 0; i-- {
 			cleaners[i]()
@@ -287,9 +265,7 @@ func WithRegionRelations(t *testing.T, dbo orm.DB, in *db.Region) Cleaner {
 		in.Country = &db.Country{}
 	}
 
-	// Check embedded entities by FK
-
-	// Country. Check if all FKs are provided.
+	// Check if all FKs are provided. Fill them into the main struct rels
 
 	if in.CountryID != 0 {
 		in.Country.ID = in.CountryID
@@ -313,10 +289,6 @@ func WithRegionRelations(t *testing.T, dbo orm.DB, in *db.Region) Cleaner {
 }
 
 func WithFakeRegion(t *testing.T, dbo orm.DB, in *db.Region) Cleaner {
-	if in.CountryID == 0 {
-		in.CountryID = gofakeit.IntRange(1, 10)
-	}
-
 	if in.Title == "" {
 		in.Title = cutS(gofakeit.Sentence(10), 255)
 	}

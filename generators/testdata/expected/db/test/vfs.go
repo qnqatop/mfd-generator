@@ -1,3 +1,4 @@
+//nolint:dupl,funlen
 package test
 
 import (
@@ -54,7 +55,6 @@ func VfsFile(t *testing.T, dbo orm.DB, in *db.VfsFile, ops ...VfsFileOpFunc) (*d
 		if _, err := dbo.ModelContext(t.Context(), &db.VfsFile{ID: vfsFile.ID}).WherePK().Delete(); err != nil {
 			t.Fatal(err)
 		}
-
 		// Clean up related entities from the last to the first
 		for i := len(cleaners) - 1; i >= 0; i-- {
 			cleaners[i]()
@@ -70,9 +70,7 @@ func WithVfsFileRelations(t *testing.T, dbo orm.DB, in *db.VfsFile) Cleaner {
 		in.Folder = &db.VfsFolder{}
 	}
 
-	// Check embedded entities by FK
-
-	// Folder. Check if all FKs are provided.
+	// Check if all FKs are provided. Fill them into the main struct rels
 
 	if in.FolderID != 0 {
 		in.Folder.ID = in.FolderID
@@ -96,10 +94,6 @@ func WithVfsFileRelations(t *testing.T, dbo orm.DB, in *db.VfsFile) Cleaner {
 }
 
 func WithFakeVfsFile(t *testing.T, dbo orm.DB, in *db.VfsFile) Cleaner {
-	if in.FolderID == 0 {
-		in.FolderID = gofakeit.IntRange(1, 10)
-	}
-
 	if in.Title == "" {
 		in.Title = cutS(gofakeit.Sentence(10), 255)
 	}
@@ -110,10 +104,6 @@ func WithFakeVfsFile(t *testing.T, dbo orm.DB, in *db.VfsFile) Cleaner {
 
 	if in.MimeType == "" {
 		in.MimeType = cutS(gofakeit.Sentence(10), 255)
-	}
-
-	if in.FileExists == false {
-		in.FileExists = gofakeit.Bool()
 	}
 
 	if in.CreatedAt.IsZero() {
@@ -171,7 +161,6 @@ func VfsFolder(t *testing.T, dbo orm.DB, in *db.VfsFolder, ops ...VfsFolderOpFun
 		if _, err := dbo.ModelContext(t.Context(), &db.VfsFolder{ID: vfsFolder.ID}).WherePK().Delete(); err != nil {
 			t.Fatal(err)
 		}
-
 		// Clean up related entities from the last to the first
 		for i := len(cleaners) - 1; i >= 0; i-- {
 			cleaners[i]()

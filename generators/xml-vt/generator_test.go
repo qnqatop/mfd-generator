@@ -32,6 +32,8 @@ func TestGenerator_Generate(t *testing.T) {
 				"portal.vt.xml": {},
 				"geo.vt.xml":    {},
 				"vfs.vt.xml":    {},
+				"card.vt.xml":   {},
+				"common.vt.xml": {},
 			}
 
 			for f := range expectedFilenames {
@@ -82,6 +84,26 @@ func prepareFiles() error {
 	}
 
 	err = os.Link(filepath.Join(testdata.PathExpected, "vfs.vt.xml"), filepath.Join(testdata.PathActual, "vfs.vt.xml"))
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+
+	err = os.Link(filepath.Join(testdata.PathExpected, "card.xml"), filepath.Join(testdata.PathActual, "card.xml"))
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+
+	err = os.Link(filepath.Join(testdata.PathExpected, "card.vt.xml"), filepath.Join(testdata.PathActual, "card.vt.xml"))
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+
+	err = os.Link(filepath.Join(testdata.PathExpected, "common.xml"), filepath.Join(testdata.PathActual, "common.xml"))
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+
+	err = os.Link(filepath.Join(testdata.PathExpected, "common.vt.xml"), filepath.Join(testdata.PathActual, "common.vt.xml"))
 	if err != nil && !os.IsExist(err) {
 		return err
 	}
