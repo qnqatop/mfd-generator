@@ -142,17 +142,6 @@ func (g *Generator) ReadFlags(command *cobra.Command) (err error) {
 		g.options.Packages = parseNamespacesFlag(nss)
 	}
 
-	if len(g.options.Tables) == 0 {
-		// fill tables from namespaces if not set
-		if len(g.options.Packages) != 0 {
-			for table := range g.options.Packages {
-				g.options.Tables = append(g.options.Tables, table)
-			}
-		} else {
-			g.options.Tables = []string{"public.*"}
-		}
-	}
-
 	return
 }
 
