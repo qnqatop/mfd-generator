@@ -19,6 +19,7 @@ const (
 	PrefixAll         = "all"
 	PrefixEntity      = "entities"
 	PrefixComposition = "composition"
+	PrefixVue3        = "vue3"
 )
 
 var (
@@ -38,6 +39,8 @@ var (
 	PathExpectedVTTemplateEntity      = filepath.Join(PathExpected, PackageVTTemplate, PrefixEntity)
 	PathActualVTTemplateComposition   = filepath.Join(PathActual, PackageVTTemplate, PrefixComposition)
 	PathExpectedVTTemplateComposition = filepath.Join(PathExpected, PackageVTTemplate, PrefixComposition)
+	PathActualVTTemplateVue3          = filepath.Join(PathActual, PackageVTTemplate, PrefixVue3)
+	PathExpectedVTTemplateVue3        = filepath.Join(PathExpected, PackageVTTemplate, PrefixVue3)
 	PathActualDBTest                  = filepath.Join(PathActual, PackageDB, PackageDBTest)
 	PathExpectedDBTest                = filepath.Join(PathExpected, PackageDB, PackageDBTest)
 )
