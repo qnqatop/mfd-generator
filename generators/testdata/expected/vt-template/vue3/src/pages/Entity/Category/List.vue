@@ -63,7 +63,6 @@
                     md="3"
                     class="mr-sm-2"
                   >
-
                     <v-text-field
                       v-model="filters.title"
                       :placeholder="

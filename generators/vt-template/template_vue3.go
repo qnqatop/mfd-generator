@@ -74,7 +74,6 @@ const listVue3Template = `<template>
                     md="3"
                     class="mr-sm-2"
                   >
-                    ` + "[[raw \"\"]]" + `
                     <v-text-field
                       v-model="filters.[[.TitleField]]"
                       :placeholder="
