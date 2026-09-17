@@ -68,7 +68,7 @@
                         t('category.list.filter.quickFilterPlaceholder')
                       "
                       hide-details
-                      @keyup.enter.native="submitFilters()"
+                      @keyup.enter="submitFilters()"
                     />
                   </v-flex>
                   <v-flex

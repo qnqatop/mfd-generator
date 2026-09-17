@@ -36,7 +36,6 @@ export default [{{range $model := .Entities}}
 ];
 `
 
-// fuck backtick js
 const listCompositionTemplate = `<template>
   <vt-entity-view>
     <v-layout
@@ -107,7 +106,7 @@ const listCompositionTemplate = `<template>
                         t('[[.JSName]].list.filter.quickFilterPlaceholder')
                       "
                       hide-details
-                      @keyup.enter.native="submitFilters()"
+                      @keyup.enter="submitFilters()"
                     />
                   </v-flex>
                   <v-flex

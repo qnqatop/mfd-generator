@@ -9,7 +9,6 @@ const routesVue3Template = routesCompositionTemplate
 // filterVue3Template repeats the composition multi filter as is
 const filterVue3Template = filterCompositionTemplate
 
-// fuck backtick js
 const listVue3Template = `<template>
   <vt-entity-view>
     <vt-row
@@ -75,14 +74,14 @@ const listVue3Template = `<template>
                     md="3"
                     class="mr-sm-2"
                   >
-                    ` + "[[raw \"<!-- Compat build: Cluster C — `@keyup.enter.native` → `@keyup.enter` -->\"]]" + `
+                    ` + "[[raw \"\"]]" + `
                     <v-text-field
                       v-model="filters.[[.TitleField]]"
                       :placeholder="
                         t('[[.JSName]].list.filter.quickFilterPlaceholder')
                       "
                       hide-details
-                      @keyup.enter.native="submitFilters()"
+                      @keyup.enter="submitFilters()"
                     />
                   </vt-col>
                   <vt-col class="ml-sm-10 mr-sm-10">

@@ -63,14 +63,14 @@
                     md="3"
                     class="mr-sm-2"
                   >
-                    <!-- Compat build: Cluster C — `@keyup.enter.native` → `@keyup.enter` -->
+
                     <v-text-field
                       v-model="filters.title"
                       :placeholder="
                         t('tag.list.filter.quickFilterPlaceholder')
                       "
                       hide-details
-                      @keyup.enter.native="submitFilters()"
+                      @keyup.enter="submitFilters()"
                     />
                   </vt-col>
                   <vt-col class="ml-sm-10 mr-sm-10">
